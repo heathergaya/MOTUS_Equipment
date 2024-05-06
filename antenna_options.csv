@@ -1,0 +1,10 @@
+Antenna,Frequency,Needed_For,Item,Source,Part_Num,Cost,Amt_unit,Source_1,Source_2,TotalCost
+9-element Yagi (Intermod Comm) - 166 mHz,166,Antennas,9-element Yagi - 166.38 mHz - 9E166NF,Intermod Communications,9E166NF,328.00,0,Contact Wisdom Atsu - way@rfintermod.com,,
+5-element Yagi (Intermod Comm)  - 166 mHz,166,Antennas,5-element Yagi - 166.38 mHz - 5E166NF,Intermod Communications,5E166NF,245.00,0,Contact Wisdom Atsu - way@rfintermod.com,,
+5-element Yagi (Laird) - 166 mHz,166,Antennas,Laird Tech Y1505 150-172 mHz Yagi Antenna,DigiKey;Mouser/ArcAntenna,Y1505,276.38,0,https://www.digikey.com/en/products/detail/te-connectivity-laird/Y1505/3521788,,
+Omnidirectional (Intermod Comm) - 166 mHz,166,Antennas,Omnidirectional - 166.38MHz - J166R-NF,Intermod Communications,166R-NF,131.00,0,Contact Wisdom Atsu - way@rfintermod.com,,
+7-element Yagi (Intermod Comm) - 434 mHz,434,Antennas,7-element Yagi - 434.00 mHz - 7E434NF,Intermod Communications,7E434NF,192.00,0,Contact Wisdom Atsu - way@rfintermod.com,,
+6-element yagi (Laird) - 434 mHz,434,Antennas,Laird Tech YS4306 433 mHz Yagi Antenna,DigiKey;Mouser/ArcAntenna,YS4306,111.05,0,https://www.mouser.com/ProductDetail/Laird/YS4306?qs=%2Fha2pyFadujrQWOZB2yywW4Zj042XebU21Mm2i5gUho%3D (alternate: https://www.digikey.ca/en/products/detail/laird-connectivity-inc/YS4306/3521886),,
+Omnidirectional (FIX ME) - 434 mHz,434,Antennas,Omnidirectional - 434.00MHz ,FIXME,,,,,,
+N-type male connector ,0,Antennas,N-type male connector  Pack of 10 N Male Plug Crimp Connector ,Amazon,,27.19,1,https://www.amazon.com/gp/product/B0779ZQKS8/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&psc=1,,
+Shireen RFC-400 50ohm coax cable by the foot,0,Antennas,Shireen RFC-400 50ohm coax cable by the foot,Shireen,RFC400,0.90,1,https://www.shireeninc.com/osc/rfc400-low-loss-rf-coax-cable-by-the-foot,,

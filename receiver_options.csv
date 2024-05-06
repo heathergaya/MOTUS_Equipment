@@ -1,0 +1,62 @@
+Item,Req,Data,Freq,Source,Cost,Amt_unit,Source_1,Source_2,ShinyName,Needed_For
+CTT Sensorstation V.3,CTT,All,NA,CTT,$889.00 ,1,https://celltracktech.com/products/sensorstation-for-sensorgnome-version-3-0,,0,Receiver
+LTE Modem,CTT,LTE,NA,CTT,$50.00 ,1,https://celltracktech.com/collections/digital-radio-products/products/sensorstation-for-sensorgnome-version-3-1?F1=LTE,,0,Receiver
+Iridium Modem,CTT,Iridium,NA,CTT,$500.00 ,1,https://celltracktech.com/collections/digital-radio-products/products/sensorstation-for-sensorgnome-version-3-1?F1=Iridium,,0,Receiver
+Bud Industries Electronics Case - NBF-32318 (UV Protected),CTT,All,NA,Allied Electronics,$78.34 ,1,https://www.alliedelec.com/product/bud-industries/nbf-32318/70148202/,https://www.amazon.com/BUD-Industries-NBF-32318-Plastic-Outdoor/dp/B005UPBOXW,0,Receiver
+GPS Antenna - 3-5V 28dB 5 Meter SMA,CTT,All,NA,Adafruit,$19.95 ,1,https://www.adafruit.com/products/960,,0,Receiver
+Pack of 4 RF U.FL(IPEX/IPX) to SMA Female (12 inches (30 cm)),CTT,All,NA,Amazon,$13.97 ,1,https://www.amazon.com/gp/product/B074RJ1RXP/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1,,0,Receiver
+5 Pcs Dual Row 4 Position Covered Screw Terminal Strip 600V 25A,CTT,All,NA,Amazon,$8.99 ,1,https://www.amazon.com/uxcell-Positions-Barrier-Terminal-TB-4504L/dp/B07DM14L15/ref=sr_1_9?keywords=dual+row+4+position+covered+screw+terminal+strip&qid=1580322077&sr=8-9,,0,Receiver
+"#6-32 1/2"" pan head machine screw",CTT,All,NA,local,$0.16 ,2,,,0,Receiver
+#-32 lock nut,CTT,All,NA,local,$0.11 ,2,,,0,Receiver
+"10-24 x 1/2"" pan head machine screw",CTT,All,NA,local,$0.19 ,8,,,0,Receiver
+10-24 coupling nut,CTT,All,NA,local,$0.51 ,4,,,0,Receiver
+#8 steel washer,CTT,All,NA,local,$0.24 ,12,,,0,Receiver
+"1/4"" x 5/8"" neoprene washer",CTT,All,NA,local,$0.77 ,12,,,0,Receiver
+"O-rings 7/32"" ID, 11/32"" OD, 1/16"" Cross Section",CTT,All,NA,local,$0.20 ,2,,,0,Receiver
+SMA Dust Cover w/chain,CTT,All,NA,Digikey,$3.10 ,2,http://www.digikey.com/product-detail/en/te-connectivity-amp-connectors/3-1478985-0/3-1478985-0-ND/1890799,,0,Receiver
+brass carriage bolt,CTT,All,NA,local,$0.20 ,2,,,0,Receiver
+brass nut,CTT,All,NA,local,$0.19 ,2,,,0,Receiver
+brass washer,CTT,All,NA,local,$0.13 ,2,,,0,Receiver
+"O-rings 1/8"" ID, 1/4"" OD, 1/16"" Cross Section",CTT,All,NA,local,$0.27 ,2,,,0,Receiver
+FUNcube Dongle Pro+,All,All,166,FUNcube Dongle,$185.29 ,0,http://www.funcubedongle.com/,,funcube,Receiver
+"SMA male to SMA female - 6"" (2-pack)",CTT,All,166,Amazon,$8.99 ,0,,,sma connector,Receiver
+DHT Electronics RF coaxial coax cable assembly SMA male to N female bulkhead 6'',CTT,All,434,Amazon,$6.00 ,0,https://www.amazon.com/gp/product/B00COX9MTG/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1,,sma bulkhead 434,Receiver
+"SMA male right angle to N female bulkhead 12""",CTT,All,166,Amazon,$6.00 ,0,https://www.amazon.com/gp/product/B00COXZ2RM/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1,,sma bulkhead 166,Receiver
+CTT Life Tag Dongle,Sensorgnome,All,434,CTT,$100.00 ,0,https://store.celltracktech.com/products/lifetag-motus-adapter,,ctt dongle,Receiver
+U.S. G.I. Heavy Duty Carry Case/Shipping Container - USED,Sensorgnome,All,166,Coleman's Military Surplus,$24.95 ,0,https://colemans.com/u-s-g-i-heavy-duty-carry-case-shipping-container-used,,big box,Receiver
+U.S. G.I. Small Utility Box,Sensorgnome,All,166,Coleman's Military Surplus,$19.95 ,0,https://colemans.com/u-s-g-i-small-utility-box,,small box,Receiver
+"DHT Electronics RF coaxial coax cable assembly SMA male to BNC female bulkhead 6""",Sensorgnome,All,NA,Amazon,$6.00 ,0,https://www.amazon.com/DHT-Electronics-coaxial-assembly-bulkhead/dp/B00CQ283QI/ref=sr_1_1?ie=UTF8&qid=1489927047&sr=8-1&keywords=DHT+Electronics+RF+coaxial+coax+cable+assembly+SMA+male+to+BNC+female+bulkhead+6%22,,sensorgnome bulkhead,Receiver
+AmazonBasics USB 2.0 Extension Cable 2-Pack - A-Male to A-Female - 3.3 Feet (1 Meter),Sensorgnome,All,NA,Amazon,$7.13 ,2,https://www.amazon.com/AmazonBasics-Extension-Cable-2-Pack-Female/dp/B00NH13Q8W/ref=sr_1_1?ie=UTF8&qid=1489927149&sr=8-1&keywords=AmazonBasics+USB+2.0+Extension+Cable+2-Pack+-+A-Male+to+A-Female+-+3.3+Feet+%281+Meter%29,,0,Receiver
+Raspberry Pi microUSB power cable with on/off switch,Sensorgnome,All,NA,Amazon,$6.99 ,1,https://www.amazon.com/gp/product/B00JU24Z3W/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1,,0,Receiver
+Black & Red Terminal Binding Post,Sensorgnome,All,NA,Amazon,$6.79 ,1,https://www.amazon.com/CESS-Terminal-Binding-Amplifier-Banana/dp/B01G0PLING/ref=sr_1_5?s=electronics&ie=UTF8&qid=1489946224&sr=1-5&keywords=binding+posts,,0,Receiver
+"O-rings 7/32"" ID, 11/32"" OD, 1/16"" Cross Section",Sensorgnome,All,NA,local,$0.15 ,3,,,0,Receiver
+32 GB microSD memory card,Sensorgnome,All,NA,Amazon,$6.99 ,1,https://www.amazon.com/dp/B08XQ8V2QJ/ref=sspa_dk_detail_0?pd_rd_i=B08XQ8V2QJ&pd_rd_w=QIlbu&content-id=amzn1.sym.dd2c6db7-6626-466d-bf04-9570e69a7df0&pf_rd_p=dd2c6db7-6626-466d-bf04-9570e69a7df0&pf_rd_r=3JEECHTMSFTV1XHENPTQ&pd_rd_wg=qNEDn&pd_rd_r=b3345bb7-cd42-41b3-89d5-e308c6e14012&s=pc&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExTThZS1JHMlJUNlE0JmVuY3J5cHRlZElkPUEwODE0NTIzTFBOUENGSFZKR0FSJmVuY3J5cHRlZEFkSWQ9QTAzMTA1NzgyTTJaTUFUQkszUENVJndpZGdldE5hbWU9c3BfZGV0YWlsX3RoZW1hdGljJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ&th=1,,0,Receiver
+CR 1220 battery,Sensorgnome,All,NA,Amazon,$6.99 ,1,https://www.amazon.com/CR1220-Battery-Lithium-Button-Batteries/dp/B0751RLXSR/ref=sr_1_8?ie=UTF8&qid=1517350919&sr=8-8&keywords=cr%2B1220%2Bbutton%2Bbattery&th=1,,0,Receiver
+D-Link powered USB Hub,Sensorgnome,All,NA,Amazon,$98.42 ,0,https://www.amazon.com/D-Link-DUB-H7-USB-2-0-7-port/dp/B0002AFZVM,,USB hub,Receiver
+Raspberry Pi 4 - Model B,Sensorgnome,All,NA,Adafruit,$45.00 ,1,https://www.adafruit.com/product/4292,,0,Receiver
+Adafruit Ultimate GPS HAT for Raspberry Pi A+/B+/Pi 2 - Mini Kit,Sensorgnome,All,NA,Adafruit,$44.95 ,1,https://www.adafruit.com/products/2324,,0,Receiver
+GPS Antenna - External Active Antenna - 3-5V 28dB 5 Meter SMA,Sensorgnome,All,NA,Adafruit,$12.95 ,1,https://www.adafruit.com/products/960,,0,Receiver
+SMA to uFL/u.FL/IPX/IPEX RF Adapter Cable,Sensorgnome,All,NA,Adafruit,$3.95 ,1,https://www.adafruit.com/products/851,,0,Receiver
+Brass M2.5 Standoffs for Pi HATs - 11mm - Black Plated - Pack of 2,Sensorgnome,All,NA,Adafruit,$0.68 ,8,https://www.adafruit.com/products/2336,,0,Receiver
+Heat sink 14 x 14 x 8,Sensorgnome,All,NA,Adafruit,$1.76 ,1,https://www.adafruit.com/product/3083,,0,Receiver
+Pushbutton w/ red LED,Sensorgnome,All,NA,Adafruit,$4.95 ,1,https://www.adafruit.com/product/559,,0,Receiver
+"Break-away 0.1"" 36-pin strip male header (10 pieces)",Sensorgnome,All,NA,Adafruit,$4.95 ,1,https://www.adafruit.com/product/392,,0,Receiver
+"Premium Female/Female Jumper Wires - 40 x 3"" (75mm)",Sensorgnome,All,NA,Adafruit,$3.95 ,1,https://www.adafruit.com/product/794,,0,Receiver
+Raspberry Pi 3 Enclosure - Tall - NMC style,Sensorgnome,All,NA,Marty Rice,$11.00 ,1,https://www.tindie.com/products/mjrice/raspberry-pi-3-enclosure-/?pt=full_prod_search,,0,Receiver
+SMA Dust Cover w/chain,Sensorgnome,All,NA,Digikey,$3.10 ,1,http://www.digikey.com/product-detail/en/te-connectivity-amp-connectors/3-1478985-0/3-1478985-0-ND/1890799,,0,Receiver
+BNC Dust Cover w/chain,Sensorgnome,All,NA,Digikey,$2.92 ,0,http://www.digikey.com/product-detail/en/pomona-electronics/3839/501-1394-ND/736704,,bnc dust,Receiver
+DC/DC Voltage Converter,Sensorgnome,All,NA,Digikey,$28.96 ,1,http://www.digikey.com/products/en?keywords=102-3154-ND,,0,Receiver
+12mm x 2.5mm flathead machine screw,Sensorgnome,All,NA,local,$0.43 ,4,,,0,Receiver
+2.5mm washer,Sensorgnome,All,NA,local,$0.25 ,4,,,0,Receiver
+brass carriage bolt,Sensorgnome,All,NA,local,$0.23 ,1,,,0,Receiver
+brass nut,Sensorgnome,All,NA,local,$0.19 ,1,,,0,Receiver
+brass washer,Sensorgnome,All,NA,local,$0.18 ,1,,,0,Receiver
+Dantona stick-on bumpers 20-pack,Sensorgnome,All,NA,local,$5.99 ,1,,,0,Receiver
+"Velcro Industrial strength heavy duty stickon on strips, 2-pack",Sensorgnome,All,NA,Amazon,$3.49 ,1,https://www.amazon.com/VELCRO-Brand-Industrial-Strength-Superior/dp/B0001UZZ72?th=1,,0,Receiver
+"O-rings 1/8"" ID, 1/4"" OD, 1/16"" Cross Section",Sensorgnome,All,NA,local,$0.27 ,1,,,0,Receiver
+CAT 5 ethernet cable,Sensorgnome,local_internet,NA,Amazon,$3.99 ,0,,,ethernet cable,Receiver
+RPi 4G/LTE Cellular Modem Kit - Telit LE910C4-NF (NA),Sensorgnome,LTE,NA,SixFab,$115.00 ,0,https://sixfab.com/product/raspberry-pi-4g-lte-modem-kit/,,rpi cellular kit,Receiver
+SMA Male to SMA Female RF Connector Adapter (10ft),Sensorgnome,,NA,Amazon,$7.99 ,0,https://www.amazon.com/Extension-Female-Connector-Adapter-Antenna/dp/B088DCWKYZ/ref=pd_sbs_23_4/132-2919077-4811434?_encoding=UTF8&pd_rd_i=B07W43XX63&pd_rd_r=33f74a27-b086-4acd-b123-f79c3d4c413b&pd_rd_w=0tigm&pd_rd_wg=WSt20&pf_rd_p=ed1e2146-ecfe-435e-b3b5-d79fa072fd58&pf_rd_r=BAXSQWAE1NGCV33S05GW&refRID=BAXSQWAE1NGCV33S05GW&th=1,,sma extension,Receiver
+Proxicast 3G / 4G / LTE/Wi-Fi Yagi Antenna (ANT-128-004),Sensorgnome,,NA,Amazon,$69.95 ,0,https://www.amazon.com/Proxicast-Broadband-Directional-1710-2700-4400-4900/dp/B073WQ8DXD?ref_=ast_sto_dp,,proxicast yagi,Receiver
+10 ft Extension Cable - SMA Male to N Male (for Proxicast yagi),Sensorgnome,,NA,Amazon,$27.98 ,0,https://www.amazon.com/gp/product/B07P12XW3J/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1,,proxicast extension,Receiver
+Proxicast 4G/LTE Omni Antenna (ANT-124-SMA-2PK),Sensorgnome,LTE,NA,Amazon,$19.95 ,0,https://www.amazon.com/Proxicast-4G-5G-External-Magnetic-Coil-Antenna/dp/B07M6J73BB?ref_=ast_sto_dp&th=1,,proxicast antenna,Receiver

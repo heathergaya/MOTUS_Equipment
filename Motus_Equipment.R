@@ -533,9 +533,17 @@ server <- function(input, output, session) {
     
     structure_related$TotalCost <- structure_related$Cost* structure_related$Amt_unit*struc
     
+    ### adjust for number of stations
+    station_count1 <- as.numeric(input$station_count1)
+    print(station_count1)
+    structure_related$Amt_unit <- structure_related$Amt_unit*station_count1
+    receiver_related$Amt_unit <- receiver_related$Amt_unit*station_count1
+    antenna_related <- tower_components$antenna[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")]
+    antenna_related$Amt_unit <- as.numeric(antenna_related$Amt_unit)*station_count1
+    antenna_related$TotalCost <- as.numeric(antenna_related$Amt_unit)*as.numeric(antenna_related$Cost)
     
     total_total <- receiver_related[0,] #grab names
-    total_total[1, 'TotalCost'] <- sum(receiver_related$Cost*receiver_related$Amt_unit)+ sum(tower_components$antenna$TotalCost) + (sum(structure_related$Cost* structure_related$Amt_unit)*struc)
+    total_total[1, 'TotalCost'] <- sum(receiver_related$Cost*receiver_related$Amt_unit)+ sum(antenna_related$TotalCost) + (sum(structure_related$Cost* structure_related$Amt_unit)*struc)
     total_total[1, 'Item'] <- 'Total Cost' 
     
     print(total_total)
@@ -544,7 +552,7 @@ server <- function(input, output, session) {
     #print(tower_components$antenna)
     if(antennaspresent){
       if(struc){ #antennas and structure
-        mylist <- rbind(tower_components$antenna[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+        mylist <- rbind(antenna_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         receiver_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         structure_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
@@ -554,7 +562,7 @@ server <- function(input, output, session) {
         supplylist$final <- mylist
     #print(tower_components$antenna)
       } else { #antennas but no structure
-        mylist <- rbind(tower_components$antenna[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+        mylist <- rbind(antenna_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         receiver_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
         mylist$Cost <- dollar(mylist$Cost)

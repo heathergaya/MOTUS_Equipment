@@ -103,10 +103,13 @@ myCSS <- paste(myCSS, spinnerCSS, sep = "\n")
 antenna_options <<- read.csv("antenna_options.csv")
 receiver_options <- read.csv("receiver_options.csv")
 receiver_options$Cost <- as.numeric(sub('.', '',receiver_options$Cost)) #get rid of dollar sign
+structure_options <- read.csv("structure_options.csv")
+structure_options$Cost <- as.numeric(sub('.', '',structure_options$Cost)) #get rid of dollar sign
 antennaspresent <<- FALSE
 #initialize antennas_selected object 
 antennas_selected <<- antenna_options
 towerheight <<- 25 #fix this later once we add in structure stuff
+struc <<- TRUE
 ################################################################################
 
 # Define UI
@@ -173,9 +176,10 @@ ui <- dashboardPage(
                                         "Brackted Rohn Tower (20 ft)" = "rohn_bracket_20",
                                         "Guyed Rohn Tower (30 ft)" = "rohn_guyed_30",
                                         "Guyed Rohn Tower (20 ft)" = "rohn_guyed_20",
-                                        "Guyed Telesecoping Mast (~15 ft)" = "telescope_15",
-                                        "Rooftop Mount (Ballast Mount)" = "ballast_roof",
-                                        "Rooftop Mount (Pole-Pole Mount)" = "pole_roof"
+                                        "Guyed Telesecoping Mast (~25 ft)" = "guyed_telescope_25",
+                                        "Other (Supplies will not be listed)" = "no_structure"
+                                        #"Rooftop Mount (Ballast Mount)" = "ballast_roof",
+                                        #"Rooftop Mount (Pole-Pole Mount)" = "pole_roof"
                                         ),
                             selected = "rohn_bracket_30"
                           ),
@@ -346,8 +350,21 @@ server <- function(input, output, session) {
     
   })
   
-  ## NEED TO ADD IN STRUCTURAL STUFF
-  ## THEN PHOTOS
+  observe({
+    req(input$structure_type)
+    req(antenna_calcs)
+    guyline <- ifelse(length(grep("guyed", input$structure_type)) !=0, 'Guyed', 'Bracket')
+    Towertype <- ifelse(length(grep("rohn", input$structure_type)) !=0, "Rohn", "PopUp")
+    towerheight <<- as.numeric(substr(input$structure_type, nchar(input$structure_type)-1, nchar(input$structure_type)))
+    #print(guyline); print(Towertype); print(towerheight)
+    tower_components$structure <- subset(structure_options, Req %in% c(Towertype, 'Both') & 
+                                          Guyed %in% c(guyline, 'Either'))
+    print(tower_components$structure[,1:9])
+    
+  })
+  
+  
+  ## NEED TO ADD IN SOLAR AND PHOTOS AND MULTIPLY FOR MULTIPLE TOWERS OF SAME TYPE #####
   
   observe({ ## grab receiver info, plus relevant information for funcubes/RMA cable counts
     chosenrec <- input$receiver_type
@@ -359,22 +376,28 @@ server <- function(input, output, session) {
     
     req(antenna_calcs)
     tower_components$receiver <- subset(receiver_options, Req %in% c(chosenrec, 'All') & 
-                                  Data %in% c(mydatplan, 'All') & Freq %in% c(antenna_calcs$freq, NA)) 
+                                  Data %in% c(mydatplan, 'All'))
   
   })
   supplylist <- reactiveValues()
   
-####### Observe the receiver information, adjust, make final data table ######
+####### Observe the receiver and structure information, adjust, make final data table ######
   output$station1_costs <- renderDataTable({
     #req(antennas_selected)
     req(antenna_calcs)
-    
+    req(input$structure_type)
     
     tot166 <- sum((antenna_calcs$freq == 166)*as.numeric(antenna_calcs$count_antenna))
     tot434 <- sum((antenna_calcs$freq == 434)*as.numeric(antenna_calcs$count_antenna))
-    
-    
+    if(is.na(tot166)){tot166 <- 0}
+    if(is.na(tot434)){tot434 <- 0}
     receiver_related <- tower_components$receiver
+    structure_related <- tower_components$structure
+    struc <<- TRUE
+    if(input$structure_type == "no_structure"){struc <<- FALSE}
+    
+    print(tot166); print(tot434)
+    
     ### change amounts for items that change depending on station specifications
     if("sma connector" %in% receiver_related$ShinyName){
       itemnum_a <- which(receiver_related$ShinyName =="sma connector")
@@ -405,6 +428,7 @@ server <- function(input, output, session) {
     if("big box" %in% receiver_related$ShinyName){
       itemnum_f <- which(receiver_related$ShinyName == "big box")
       itemnum_g <- which(receiver_related$ShinyName == "small box")
+      print(itemnum_g); print(itemnum_f); print(tot434); print(tot166)
       if(tot434 + tot166 > 2){
         receiver_related[itemnum_f, 'Amt_unit'] <- 1
         receiver_related <- receiver_related[-itemnum_g, ] #remove small box
@@ -432,7 +456,7 @@ server <- function(input, output, session) {
     
     if('ethernet cable' %in% receiver_related$ShinyName){
       itemnum_k <- which(receiver_related$ShinyName == "ethernet cable")
-      if(mydatplan == 'local_internet'){
+      if(mydatplan == 'local_internet' & input$receiver_type != 'CTT'){
         receiver_related[itemnum_k, 'Amt_unit'] <- 1
       } else{
         receiver_related <- receiver_related[-itemnum_k, ] #only need ethernet for sensorgnome local connection to internet
@@ -451,28 +475,110 @@ server <- function(input, output, session) {
     
     receiver_related$TotalCost <-  receiver_related$Cost*receiver_related$Amt_unit
     
+    #### Same idea, but for structure items ####
+    if("T_thru" %in% structure_related$ShinyName & tot166 > 1){
+      s_item_a <- which(structure_related$ShinyName =="T_thru")
+      structure_related[s_item_a, 'Amt_unit'] <- 1 #only need if >1 big antenna 
+    }
+    
+    if("Roof" %in% structure_related$ShinyName & tot434 > 3){
+      s_item_b <- which(structure_related$ShinyName =="Roof")
+      structure_related[s_item_b, 'Amt_unit'] <- 1 #only need if >3 CTT antenna 
+    }
+    
+    if("main" %in% structure_related$ShinyName){
+      s_item_c <- which(structure_related$ShinyName =="main")
+      structure_related[s_item_c, 'Amt_unit'] <- max(floor(towerheight/10 -1), 0)
+    }
+    
+    if("small spool" %in% structure_related$ShinyName){
+      s_item_d <- which(structure_related$ShinyName =="small spool")
+      #s_item_d2 <- which(structure_related$ShinyName =="big spool")
+     guylength <- ceiling(sqrt((towerheight^2)+((towerheight*0.7)^2)))*3+15
+     #if(guylength <= 250){
+      structure_related[s_item_d, 'Amt_unit'] <- 1
+      #structure_related[s_item_d2, 'Amt_unit'] <- 0
+      #}
+      #### NOTE THIS WILL CHANGE WHEN WE IMPLEMENT MULTIPLE TOWERS OF THE SAME TYPE
+    }
+    
+    if("thimble" %in% structure_related$ShinyName){
+      s_item_e <- which(structure_related$ShinyName =="thimble")
+      structure_related[s_item_e, 'Amt_unit'] <- 3
+      if(input$structure_type == "guyed_telescope_25") {structure_related[s_item_e, 'Amt_unit'] <- 6} #6 anchors for pop up towers
+    }
+    
+    if("clamps" %in% structure_related$ShinyName){
+      s_item_f <- which(structure_related$ShinyName =="clamps")
+      structure_related[s_item_f, 'Amt_unit'] <- 24
+      if(input$structure_type == "guyed_telescope_25") {structure_related[s_item_f, 'Amt_unit'] <- 48} #6 lines for popups
+    }
+    
+    if("turnbuckle" %in% structure_related$ShinyName){
+      s_item_g <- which(structure_related$ShinyName =="turnbuckle")
+      structure_related[s_item_g, 'Amt_unit'] <- 3
+      if(input$structure_type == "guyed_telescope_25") {structure_related[s_item_g, 'Amt_unit'] <- 6} #6 lines for popups
+    }
+    
+    if("shackle" %in% structure_related$ShinyName){
+      s_item_h <- which(structure_related$ShinyName =="shackle")
+      structure_related[s_item_h, 'Amt_unit'] <- 3
+    }
+    
+    if("anchor" %in% structure_related$ShinyName){
+      s_item_i <- which(structure_related$ShinyName =="archor")
+      structure_related[s_item_i, 'Amt_unit'] <- 3
+      if(input$structure_type == "guyed_telescope_25") {structure_related[s_item_i, 'Amt_unit'] <- 6} #6 lines for popups
+    }
+    
+    structure_related$TotalCost <- structure_related$Cost* structure_related$Amt_unit*struc
+    
+    
     total_total <- receiver_related[0,] #grab names
-    total_total[1, 'TotalCost'] <- sum(receiver_related$Cost*receiver_related$Amt_unit)+ sum(tower_components$antenna$TotalCost)
+    total_total[1, 'TotalCost'] <- sum(receiver_related$Cost*receiver_related$Amt_unit)+ sum(tower_components$antenna$TotalCost) + (sum(structure_related$Cost* structure_related$Amt_unit)*struc)
     total_total[1, 'Item'] <- 'Total Cost' 
+    
+    print(total_total)
     
     #print(antennaspresent)
     #print(tower_components$antenna)
     if(antennaspresent){
+      if(struc){ #antennas and structure
         mylist <- rbind(tower_components$antenna[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         receiver_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        structure_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                         total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
         mylist$Cost <- dollar(mylist$Cost)
         mylist$TotalCost <- dollar(mylist$TotalCost)
         print('end of rendering')
         supplylist$final <- mylist
     #print(tower_components$antenna)
-    } else {
-      mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+      } else { #antennas but no structure
+        mylist <- rbind(tower_components$antenna[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        receiver_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
+        mylist$Cost <- dollar(mylist$Cost)
+        mylist$TotalCost <- dollar(mylist$TotalCost)
+        print('end of rendering- no structure')
+        supplylist$final <- mylist
+    }} #end antennas = TRUE
+      else {
+        if(struc){
+            mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                            structure_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
                                  total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
-           mylist$Cost <- dollar(mylist$Cost)
-           mylist$TotalCost <- dollar(mylist$TotalCost)
+            mylist$Cost <- dollar(mylist$Cost)
+            mylist$TotalCost <- dollar(mylist$TotalCost)
     supplylist$final <- mylist      
-          print('other')
+            print('other - structure')
+        } else {
+            mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                          total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
+          mylist$Cost <- dollar(mylist$Cost)
+          mylist$TotalCost <- dollar(mylist$TotalCost)
+          supplylist$final <- mylist      
+          print('just receiver')
+        }
     }
     #print(tail(supplylist$final$Item, n = 10))
     print('end of table')
@@ -480,7 +586,7 @@ server <- function(input, output, session) {
     # Use DataTables to render the data
     #return(
       DT::datatable(
-        data = mylist,
+        data = mylist[mylist$Amt_unit > 0 | mylist$Item == 'Total Cost', ],
         extensions = 'Buttons',
         selection = 'none',
         rownames= FALSE,
@@ -493,31 +599,7 @@ server <- function(input, output, session) {
       )
     #)
     })
-
-  #### Make the data table output #######
-
-# output$station1_costs <- renderDataTable({
-#   #req(supplylist)
-#     print('end of table')
-#     #browser()
-#     # Use DataTables to render the data
-#   return(
-#     DT::datatable(
-#       data = supplylist$final,
-#       extensions = 'Buttons',
-#       selection = 'none',
-#       rownames= FALSE,
-#       options = list(
-#         pageLength = 40,
-#         autoWidth = TRUE,
-#         dom = 'Bfrtip',  # Define the table control elements to appear on the web page
-#         buttons = list('copy', 'csv', 'excel', 'pdf', 'print')
-#       )
-#     )
-#   )
-#   })
-
 }
 
 # Run the app
-shinyApp(ui = ui, server = server, options = list(display.mode="showcase"))
+shinyApp(ui = ui, server = server) #, options = list(display.mode="showcase"))

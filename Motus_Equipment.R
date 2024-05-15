@@ -344,8 +344,8 @@ server <- function(input, output, session) {
       antenna_connectors$TotalCost <- antenna_connectors$Cost*as.numeric(antenna_connectors$Amt_unit)
       #print(antenna_connectors)
       
-    tower_components$antenna <- rbind(antennas_selected[,c("Item", 'Needed_For', "Source", "Cost", "Amt_unit", "Source_1", "Source_2", "TotalCost")],
-                                     antenna_connectors[,c("Item", 'Needed_For', "Source", "Cost", "Amt_unit", "Source_1", "Source_2", "TotalCost")]) 
+    tower_components$antenna <- rbind(antennas_selected[,c("Item", 'Needed_For', "Source", "Part_Num", "Cost", "Amt_unit", "Source_1", "Source_2", "TotalCost")],
+                                     antenna_connectors[,c("Item", 'Needed_For', "Source", "Part_Num", "Cost", "Amt_unit", "Source_1", "Source_2", "TotalCost")]) 
     antennaspresent <<- nrow(tower_components$antenna) >0
     
   })
@@ -538,7 +538,7 @@ server <- function(input, output, session) {
     print(station_count1)
     structure_related$Amt_unit <- structure_related$Amt_unit*station_count1
     receiver_related$Amt_unit <- receiver_related$Amt_unit*station_count1
-    antenna_related <- tower_components$antenna[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")]
+    antenna_related <- tower_components$antenna[,c("Item", "Needed_For","Source", "Part_Num","Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")]
     antenna_related$Amt_unit <- as.numeric(antenna_related$Amt_unit)*station_count1
     antenna_related$TotalCost <- as.numeric(antenna_related$Amt_unit)*as.numeric(antenna_related$Cost)
     
@@ -552,19 +552,19 @@ server <- function(input, output, session) {
     #print(tower_components$antenna)
     if(antennaspresent){
       if(struc){ #antennas and structure
-        mylist <- rbind(antenna_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                        receiver_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                        structure_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                        total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
+        mylist <- rbind(antenna_related[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        receiver_related[,c("Item","Needed_For", "Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        structure_related[,c("Item","Needed_For", "Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        total_total[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
         mylist$Cost <- dollar(mylist$Cost)
         mylist$TotalCost <- dollar(mylist$TotalCost)
         print('end of rendering')
         supplylist$final <- mylist
     #print(tower_components$antenna)
       } else { #antennas but no structure
-        mylist <- rbind(antenna_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                        receiver_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                        total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
+        mylist <- rbind(antenna_related[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        receiver_related[,c("Item","Needed_For", "Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                        total_total[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
         mylist$Cost <- dollar(mylist$Cost)
         mylist$TotalCost <- dollar(mylist$TotalCost)
         print('end of rendering- no structure')
@@ -572,16 +572,16 @@ server <- function(input, output, session) {
     }} #end antennas = TRUE
       else {
         if(struc){
-            mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                            structure_related[,c("Item","Needed_For", "Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                                 total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
+            mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                            structure_related[,c("Item","Needed_For", "Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                                 total_total[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
             mylist$Cost <- dollar(mylist$Cost)
             mylist$TotalCost <- dollar(mylist$TotalCost)
     supplylist$final <- mylist      
             print('other - structure')
         } else {
-            mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
-                          total_total[,c("Item", "Needed_For","Source", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
+            mylist <- rbind(receiver_related[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")],
+                          total_total[,c("Item", "Needed_For","Source", "Part_Num", "Cost", "Amt_unit", "TotalCost", "Source_1", "Source_2")])
           mylist$Cost <- dollar(mylist$Cost)
           mylist$TotalCost <- dollar(mylist$TotalCost)
           supplylist$final <- mylist      
@@ -599,10 +599,16 @@ server <- function(input, output, session) {
         selection = 'none',
         rownames= FALSE,
         options = list(
+          server = FALSE, #download all data, not just visible
           pageLength = 40,
           autoWidth = TRUE,
+          filename = "Motus_equipment", 
           dom = 'Bfrtip',  # Define the table control elements to appear on the web page
-          buttons = list('copy', 'csv', 'excel', 'pdf', 'print')
+          buttons = list('copy', 
+                         list(extend = "csv", title = "Motus Tower Equipment List"),
+                         list(extend = "excel", title = "Motus Tower Equipment List"),
+                         list(extend = "pdf", title = "Motus Tower Equipment List"),
+                         list(extend = "print", title = "Motus Tower Equipment List")) #end buttons
         )
       )
     #)
